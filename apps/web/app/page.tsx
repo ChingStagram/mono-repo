@@ -55,7 +55,7 @@ export default function Page(): JSX.Element {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          examples/basic&nbsp;
+          examples/pro&nbsp;
           <Code className={styles.code}>web</Code>
         </p>
         <div>
