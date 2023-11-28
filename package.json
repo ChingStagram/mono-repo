@@ -1,5 +1,5 @@
 {
-  "name": "chingstagrm",
+  "name": "chingstagrm-mono-repo",
   "private": true,
   "scripts": {
     "build": "turbo build",
