@@ -5,7 +5,9 @@ import { Code } from "@repo/ui/code";
 export default function Page() {
   return (
     <main>
-      <h1 className="text-3xl font-bold underline">Tailwind Test</h1>
+      <h1 className="text-3xl font-bold text-red-600 underline">
+        Tailwind Test
+      </h1>
       <p className="text-2xl bg-black">Test</p>
     </main>
   );
