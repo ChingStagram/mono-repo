@@ -21,26 +21,26 @@ RUN apk update
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 COPY .gitignore .gitignore
-COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
-COPY --from=builder /app/out/full/ .
+COPY --from=builder /app/out/full .
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN pnpm install
+
+
 RUN pnpm turbo run build --filter=api...
 
-# FROM base AS runner
+FROM base AS runner
 
-# # package
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 nestjs
-# USER nestjs
+WORKDIR /app
+# package
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nestjs
+USER nestjs
 
-# COPY --from=installer /app/apps/api/next.config.js .
-# COPY --from=installer /app/apps/api/package.json .
+ENV TZ=Asia/Seoul
+ENV PORT=3000
+EXPOSE 3000
 
-# ENV TZ=Asia/Seoul
-# ENV PORT=3000
-# EXPOSE 3000
+COPY --from=installer --chown=nestjs:nodejs /app .
 
-# COPY --from=installer --chown=nestjs:nodejs /app/apps/api/dist ./
-
-# CMD node apps/api/dist/main.js
+CMD node /app/apps/api/dist/main.js
