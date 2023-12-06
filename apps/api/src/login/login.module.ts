@@ -3,7 +3,7 @@ import { LoginController } from './login.controller';
 import { LoginService } from './login.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from '../jwt/jwt.strategy';
+import { JwtNaverStrategy, JwtStrategy } from '../jwt/jwt.strategy';
 
 @Module({
   imports: [
@@ -14,6 +14,7 @@ import { JwtStrategy } from '../jwt/jwt.strategy';
     }),
   ],
   controllers: [LoginController],
-  providers: [LoginService, JwtStrategy],
+  providers: [LoginService, JwtStrategy, JwtNaverStrategy],
+  exports: [PassportModule],
 })
 export class LoginModule {}

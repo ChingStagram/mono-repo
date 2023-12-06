@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as NaverStrategy } from 'passport-naver';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -15,16 +15,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 }
 
 @Injectable()
-export class JwtGoogleStrategy extends PassportStrategy(
-  GoogleStrategy,
-  'google',
-) {
+export class JwtNaverStrategy extends PassportStrategy(NaverStrategy, 'naver') {
   constructor() {
     super({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL,
-      scope: ['email', 'profile'],
+      clientID: process.env.NAVER_CLIENT,
+      clientSecret: process.env.NAVER_SECRET,
+      callbackURL: process.env.NAVER_CALLBACK,
+      scope: ['email'],
     });
   }
 
